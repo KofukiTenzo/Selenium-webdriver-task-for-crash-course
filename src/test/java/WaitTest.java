@@ -26,51 +26,19 @@ public class WaitTest {
 
     @Test
     public void testOpenCart() throws InterruptedException {
-        driver.get("https://devexpress.github.io/devextreme-reactive/react/grid/docs/guides/filtering/");
         driver.manage().window().maximize();
+        driver.get("http://speak-ukrainian.eastus2.cloudapp.azure.com/dev/");
 
-        WebElement acceptCookies = driver.findElement(By.xpath("/html/body/div/div[1]/div/footer[2]/div/div/div[2]/button"));
-        acceptCookies.click();
-//
-        acceptCookies = driver.findElement(By.xpath("/html/body/div/div[1]/div/div/div/div/div[1]/div/div/h3[1]/a"));
-        acceptCookies.click();
+        driver.findElement(By.xpath("/html/body/div[1]/div/header/div[2]/ul/li[1]/span[2]/a")).click();
 
-        List<WebElement> filter = driver.findElements(By.xpath("//html/body/div[2]/div/div/div/div/div/div/div/table/thead/tr[2]/th[3]/div/div"));
+        WebElement search = driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/main/div/div[1]/div[2]/div/div[1]/div/span[1]/input"));
+        search.click();
+        search.sendKeys("Dream Team");
 
-        for (WebElement webElement : filter) {
-            webElement.sendKeys("L");
-        }
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//
-//        List<WebElement> valueElement = driver.findElements(By.xpath("/html/body/div[2]/div/div/div/div/div/div/div/table/tbody/tr[1]/td[3]"));
-//
-//        wait.until(ExpectedConditions.textToBePresentInElement(valueElement.get(0), "Las Vegas"));
-//        wait.until(ExpectedConditions.textToBePresentInElement(valueElement.get(1), "Las Vegas"));
-//        wait.until(ExpectedConditions.textToBePresentInElement(valueElement.get(2), "London"));
+        driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/main/div/div[2]/main")).getText().contains("Dream Team");
 
-        List<WebElement> filteredElements = driver.findElements(By.cssSelector(".MuiTableBody-root > tr:nth-child(1) > td:nth-child(3)"));
-
-//        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(filteredElements));
-
-        // Find text in filtered elements
-        for (WebElement element : filteredElements) {
-            String text = element.getText();
-            System.out.println("Text found: " + text);
-        }
-
-
-//        List<WebElement> valueElement = wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div/div/table/tbody/tr[1]")), "Las Vegas"));
-
-//        /html/body/div[2]/div/div/div/div/div/div/div/table/tbody/tr[1]
-
-//        /html/body/div[2]/div/div/div/div/div/div/div/table/colgroup/col[3]
-
-//        WebDriverWait waitAfterSearch = new WebDriverWait(driver, Duration.ofSeconds(5));
-//        waitAfterSearch.until(ExpectedConditions.textToBePresentInElement(valueElement.get(0), "Las Vegas"));
-//        waitAfterSearch.until(ExpectedConditions.textToBePresentInElement(valueElement.get(1), "Las Vegas"));
-//        waitAfterSearch.until(ExpectedConditions.textToBePresentInElement(valueElement.get(2), "London"));
     }
 
     @AfterEach
